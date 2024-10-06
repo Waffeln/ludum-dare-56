@@ -1,4 +1,5 @@
 #include "raylib.h" 
+#include <stdio.h>
 #include <string.h>
 #include "character.c"
 
@@ -22,22 +23,29 @@ int main() {
 
   while(!WindowShouldClose()) {
    // 1. Event Handling
-  
     if (IsKeyDown(KEY_RIGHT)) {
       player = changeCharAnimation(player, "right", player.animWalk, player.animWalkFrames);
       player.position.x += player.speed;
-    } else if (IsKeyDown(KEY_LEFT)) {
+    } 
+    if (IsKeyDown(KEY_LEFT)) {
       player = changeCharAnimation(player, "left", player.animWalk, player.animWalkFrames);
       player.position.x -= player.speed;
-    } else if (IsKeyDown(KEY_UP)){
+    } 
+    if (IsKeyDown(KEY_UP)){
       player = changeCharAnimation(player, "-", player.animWalk, player.animWalkFrames);
       player.position.y -= player.speed;
-    } else if (IsKeyDown(KEY_DOWN)){
+    } 
+    if (IsKeyDown(KEY_DOWN)){
       player = changeCharAnimation(player, "-", player.animWalk, player.animWalkFrames);
       player.position.y += player.speed;
-    } else if(strcmp(player.direction, "right")) {
-      player = changeCharAnimation(player, player.direction, player.animIdle, player.animIdleFrames);
-    } else player = changeCharAnimation(player, player.direction, player.animIdle, player.animIdleFrames);
+    } 
+    if(IsKeyDown(KEY_DOWN) == 0 && IsKeyDown(KEY_UP) ==0 && IsKeyDown(KEY_LEFT) == 0 && IsKeyDown(KEY_RIGHT) == 0) {
+      if(strcmp(player.direction, "right")) {
+        player = changeCharAnimation(player, player.direction, player.animIdle, player.animIdleFrames);
+      } else player = changeCharAnimation(player, player.direction, player.animIdle, player.animIdleFrames);
+    }
+
+    printf("\n%d\n", IsKeyDown(KEY_DOWN)); 
       
     // 2. Update Positions
 
